@@ -1,0 +1,15 @@
+monolog:
+    handlers:
+        create_command:
+            type:  rotating_file
+            path:  '%kernel.logs_dir%/create.log'
+            level: debug
+            max_files: 365
+        restore_command:
+            type:  rotating_file
+            path:  '%kernel.logs_dir%/restore.log'
+            level: debug
+            max_files: 365
+    channels:
+        - create_command
+        - restore_command
