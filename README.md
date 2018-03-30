@@ -15,7 +15,7 @@ su sfmysqlbackup
 - download [sfmysqlbackup.phar](https://github.com/TheRatG/sfmysqlbackup) 
 - run init, enter *--backup--dir*, *--database-url* (for example: mysql://db_user:db_password@127.0.0.1:3306/db_name), and *--remote-dir* 
 ```bash
-php sfmysqlbackup.phar init --database-url=<url>
+php sfmysqlbackup.phar init
 ```
 
 ## Commands
