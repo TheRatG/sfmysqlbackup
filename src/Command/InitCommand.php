@@ -23,12 +23,6 @@ class InitCommand extends ContainerAwareCommand
                 'Local dir'
             )
             ->addOption(
-                'remote-url',
-                null,
-                InputOption::VALUE_REQUIRED,
-                'Remote url for "scp" unix command'
-            )
-            ->addOption(
                 'database-url',
                 null,
                 InputOption::VALUE_REQUIRED,
@@ -64,15 +58,10 @@ class InitCommand extends ContainerAwareCommand
             $databaseUrl = $io->ask('Enter database url:', 'mysql://homestead:secret@localhost:3306');
         }
 
-        $remoteUrl = $input->getOption('remote-url');
-        if (!$remoteUrl) {
-            $remoteUrl = $io->ask('Enter remote url:');
-        }
-
         $config['sfmysqlbackup'] = [
             'local_dir' => $localDir,
-            'remote_url' => $remoteUrl,
             'database_url' => $databaseUrl,
+            'remote' => null,
         ];
 
         try {

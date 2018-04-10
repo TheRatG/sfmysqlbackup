@@ -1,0 +1,37 @@
+#!/usr/bin/env php
+<?php
+
+use App\Kernel;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+
+set_time_limit(0);
+
+require __DIR__.'/../vendor/autoload.php';
+
+$input = new ArgvInput();
+$env = 'prod';
+$debug = false;
+
+$kernel = new Kernel($env, $debug);
+$kernel->boot();
+$container = $kernel->getContainer();
+$application = new Application('sfmysqlbackup', '@package_version@');
+
+$command = new \App\Command\InitCommand();
+$command->setContainer($container);
+$application->add($command);
+
+$command = new \App\Command\CreateCommand();
+$command->setContainer($container);
+$application->add($command);
+
+$command = new \App\Command\ShowCommand();
+$command->setContainer($container);
+$application->add($command);
+
+$command = new \App\Command\RestoreCommand();
+$command->setContainer($container);
+$application->add($command);
+
+$application->run($input);

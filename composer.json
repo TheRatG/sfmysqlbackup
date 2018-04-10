@@ -30,6 +30,7 @@
             "allow-contrib": "true"
         }
     },
+    "bin": ["bin/sfmysqlbackup"],
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",

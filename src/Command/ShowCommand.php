@@ -24,8 +24,6 @@ class ShowCommand extends ContainerAwareCommand
         $this
             ->setName('show')
             ->setDescription('Show available backups')
-            ->addOption('local', 'l', InputOption::VALUE_NONE, 'Show local backups')
-            ->addOption('remote', 'r', InputOption::VALUE_NONE, 'Show remote backups')
         ;
     }
 
@@ -36,22 +34,16 @@ class ShowCommand extends ContainerAwareCommand
 
         $helper = $this->getContainer()->get(BackupFinder::class);
 
-        if ($input->getOption('local') && !$input->getOption('remote')) {
-            $collection = $helper->findLocal();
-        } elseif ($input->getOption('remote') && !$input->getOption('local')) {
-            $collection = $helper->findRemote();
-        } else {
-            $collection = $helper->findAll();
-        }
+        $collection = $helper->find();
 
         $io = new SymfonyStyle($input, $output);
-        $headers = ['Name', 'Date Time', 'Type'];
+        $headers = ['Name', 'Date Time', 'Directory'];
         $rows = [];
         foreach ($collection->sort() as $key => $backup) {
             $rows[] = [
                 basename($backup->getDirectory()),
                 $backup->getDatetime()->format('Y-m-d H:i:s'),
-                $backup->getType(),
+                $backup->getDirectory(),
             ];
         }
 

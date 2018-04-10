@@ -4,33 +4,28 @@ namespace App\Model;
 
 class Backup
 {
-    const DT_FORMAT = 'Ymd_His';
-
-    const TYPE_LOCAL = 'local';
-    const TYPE_REMOTE = 'remote';
+    const DT_FORMAT = 'Ymd_Hi';
 
     /**
      * @var string
      */
     protected $directory;
 
-    /**
-     * @var string
-     */
-    protected $type;
-
-    public function __construct($directory, $type)
+    public function __construct($directory)
     {
         $this->setDirectory($directory);
-        $this->setType($type);
     }
 
     public function getDatetime()
     {
-        $directory = basename($this->getDirectory());
-        $result = \DateTime::createFromFormat(self::DT_FORMAT, $directory);
+        $result = \DateTime::createFromFormat(self::DT_FORMAT, $this->getName());
 
         return $result;
+    }
+
+    public function getName()
+    {
+        return basename($this->getDirectory());
     }
 
     /**
@@ -55,39 +50,5 @@ class Backup
         }
 
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param string $type
-     *
-     * @return self
-     */
-    public function setType($type)
-    {
-        if (!in_array($type, [self::TYPE_LOCAL, self::TYPE_REMOTE])) {
-            throw new \InvalidArgumentExceptio(sprintf('Unknown type "%s', $type));
-        }
-
-        $this->type = $type;
-
-        return $this;
-    }
-
-    public function getTypeOrderValue()
-    {
-        $map = [
-            self::TYPE_LOCAL => 0,
-            self::TYPE_REMOTE => 1,
-        ];
-
-        return $map[$this->getType()];
     }
 }

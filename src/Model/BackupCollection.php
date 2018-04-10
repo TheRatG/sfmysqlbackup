@@ -9,10 +9,25 @@ class BackupCollection extends ArrayCollection
     /*
      * return Backup
      */
+    public function getByname($name)
+    {
+        $result = null;
+        foreach ($this as $value) {
+            if ($name == $value->getName()) {
+                $result = $value;
+            }
+        }
+
+        return $result;
+    }
+
+    /*
+     * return Backup
+     */
     public function getByDatetime(\DateTime $datetime)
     {
         $result = null;
-        foreach ($this as $key => $value) {
+        foreach ($this as $value) {
             if ($datetime == $value->getDatetime()) {
                 $result = $value;
             }
@@ -25,8 +40,7 @@ class BackupCollection extends ArrayCollection
     {
         $criteria = Criteria::create()
             ->orderBy([
-                "datetime" => Criteria::DESC,
-                'typeOrderValue' => Criteria::ASC,
+                "datetime" => Criteria::DESC
             ]);
 
         return $this->matching($criteria);

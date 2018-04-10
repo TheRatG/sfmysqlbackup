@@ -63,13 +63,9 @@ class RestoreCommand extends ContainerAwareCommand
 
     protected function buildCmd(InputInterface $input)
     {
-        $datetime = \DateTime::createFromFormat(\App\Model\Backup::DT_FORMAT, $input->getArgument('name'));
-        if (!$datetime) {
-            throw new \RuntimeException(sprintf('Invalid name argument "%s"', $input->getArgument('name')));
-        }
-        $subdir = $datetime->format(\App\Model\Backup::DT_FORMAT);
         $helper = $this->getContainer()->get(BackupFinder::class);
-        $backup = $helper->getByDatetime($datetime);
+        $subdir = $input->getArgument('name');
+        $backup = $helper->getByName($subdir);
 
         if (!$backup) {
             $this->logger->info(sprintf('Backup "%s" not found', $subdir));

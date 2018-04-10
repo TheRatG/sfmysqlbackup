@@ -25,16 +25,20 @@ class BackupFinder
         $this->logger = $logger;
     }
 
+    public function getByName($name)
+    {
+        $result = null;
+        $collection = $this->find();
+        $result = $collection->getByName($name);
+
+        return $result;
+    }
+
     public function getByDatetime(\DateTime $datetime)
     {
         $result = null;
-        $collection = $this->findLocal();
+        $collection = $this->find();
         $result = $collection->getByDatetime($datetime);
-
-        if (!$result) {
-            $collection = $this->findRemote();
-            $result = $collection->getByDatetime($datetime);
-        }
 
         return $result;
     }
@@ -42,35 +46,20 @@ class BackupFinder
     /*
      * return BackupCollection
      */
-    public function findAll()
-    {
-        $data = $this->findLocal();
-
-        $result = $data->sort();
-
-        return $result;
-    }
-
-    public function findLocal()
+    public function find()
     {
         $dir = $this->config->getLocalDir();
 
         $result = new BackupCollection();
         foreach (glob($dir.'/*/metadata') as $filename) {
             try {
-                $element = new Backup(dirname($filename), Backup::TYPE_LOCAL);
+                $element = new Backup(dirname($filename));
                 $result->add($element);
             } catch (\InvalidArgumentException $e) {
                 $this->logger->warning($e->getMessage());
             }
         }
 
-        return $result;
-    }
-
-    public function findRemote()
-    {
-        $result = new BackupCollection();
-        return $result;
+        return $result->sort();
     }
 }

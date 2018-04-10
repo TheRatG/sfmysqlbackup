@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# CHECK box COMMAND
+command -v box >/dev/null 2>&1 || { echo "Error : Command box is not installed on the system"; echo "See : https://github.com/box-project/box2 "; echo  "Exiting..." >&2; exit 65; }
+
+REAL_PATH="$(cd "$(dirname "$0")" && pwd -P)";
+ROOT_DIR=`dirname "${REAL_PATH}"`;
+
+[ ! -d ${ROOT_DIR}/build ] && mkdir ${ROOT_DIR}/build;
+
+cd ${ROOT_DIR};
+composer install --no-dev;
+ulimit -Sn 4096 && box build --verbose;
+
+composer install;
