@@ -38,7 +38,7 @@ class ShowCommand extends ContainerAwareCommand
 
         if ($input->getOption('local') && !$input->getOption('remote')) {
             $collection = $helper->findLocal();
-        } else if ($input->getOption('remote') && !$input->getOption('local')) {
+        } elseif ($input->getOption('remote') && !$input->getOption('local')) {
             $collection = $helper->findRemote();
         } else {
             $collection = $helper->findAll();

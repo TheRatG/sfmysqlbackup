@@ -61,7 +61,8 @@ class RestoreCommand extends ContainerAwareCommand
         $this->logger->debug(sprintf('"%s" command finished', $this->getName()));
     }
 
-    protected function buildCmd(InputInterface $input) {
+    protected function buildCmd(InputInterface $input)
+    {
         $datetime = \DateTime::createFromFormat(\App\Model\Backup::DT_FORMAT, $input->getArgument('name'));
         if (!$datetime) {
             throw new \RuntimeException(sprintf('Invalid name argument "%s"', $input->getArgument('name')));

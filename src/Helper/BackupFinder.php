@@ -19,7 +19,7 @@ class BackupFinder
      */
     protected $logger;
 
-    public function __construct(AppConfig $config, LoggerInterface $logger) 
+    public function __construct(AppConfig $config, LoggerInterface $logger)
     {
         $this->config = $config;
         $this->logger = $logger;
@@ -42,7 +42,7 @@ class BackupFinder
     /*
      * return BackupCollection
      */
-    public function findAll() 
+    public function findAll()
     {
         $data = $this->findLocal();
 
@@ -51,17 +51,16 @@ class BackupFinder
         return $result;
     }
 
-    public function findLocal() 
+    public function findLocal()
     {
         $dir = $this->config->getLocalDir();
 
         $result = new BackupCollection();
-        foreach(glob($dir.'/*/metadata') as $filename) {
-            try
-            {
+        foreach (glob($dir.'/*/metadata') as $filename) {
+            try {
                 $element = new Backup(dirname($filename), Backup::TYPE_LOCAL);
                 $result->add($element);
-            } catch(\InvalidArgumentException $e) {
+            } catch (\InvalidArgumentException $e) {
                 $this->logger->warning($e->getMessage());
             }
         }
@@ -69,7 +68,7 @@ class BackupFinder
         return $result;
     }
 
-    public function findRemote() 
+    public function findRemote()
     {
         $result = new BackupCollection();
         return $result;

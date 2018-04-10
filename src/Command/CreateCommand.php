@@ -24,7 +24,12 @@ class CreateCommand extends ContainerAwareCommand
             ->setName('create')
             ->setDescription('Create dump')
             ->addOption('regex', 'r', InputOption::VALUE_REQUIRED, 'Once can use --regex functionality')
-            ->addOption('no-locks', null, InputOption::VALUE_NONE, 'Do not execute the temporary shared read lock. WARNING: This will cause inconsistent backups')
+            ->addOption(
+                'no-locks',
+                null,
+                InputOption::VALUE_NONE,
+                'Do not execute the temporary shared read lock. WARNING: This will cause inconsistent backups'
+            )
             ->addOption('dry-run', null, InputOption::VALUE_NONE, 'Execute the command as a dry run.')
         ;
     }
@@ -59,7 +64,8 @@ class CreateCommand extends ContainerAwareCommand
         $this->logger->debug(sprintf('"%s" command finished', $this->getName()));
     }
 
-    protected function buildCmd(InputInterface $input) {
+    protected function buildCmd(InputInterface $input)
+    {
         $config = $this->getContainer()->get(\App\Config\AppConfig::class);
 
         if (!file_exists($config->getLocalDir())) {

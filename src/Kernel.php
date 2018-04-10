@@ -25,7 +25,8 @@ class Kernel extends BaseKernel
         return $this->geSfMysqlBackupDir().'/var/log';
     }
 
-    public function geSfMysqlBackupDir() {
+    public function geSfMysqlBackupDir()
+    {
         return $_SERVER['HOME'] . '/.sfmysqlbackup';
     }
 
@@ -55,7 +56,8 @@ class Kernel extends BaseKernel
 
         if (file_exists($this->geSfMysqlBackupDir())) {
             $loader->load(
-                $this->geSfMysqlBackupDir().'/*'.self::CONFIG_EXTS, 'glob'
+                $this->geSfMysqlBackupDir().'/*'.self::CONFIG_EXTS,
+                'glob'
             );
         }
     }

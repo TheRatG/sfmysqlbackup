@@ -2,22 +2,25 @@
 
 namespace App\Config;
 
-class AppConfig 
+class AppConfig
 {
     /*
      * @var array
      */
     protected $config;
 
-    public function __construct(array $config = []) {
+    public function __construct(array $config = [])
+    {
         $this->config = $config;
     }
 
-    public function getLocalDir() {
+    public function getLocalDir()
+    {
         return $this->config['local_dir'] . '/' . $this->getDatabase();
     }
 
-    public function getDatabase() {
+    public function getDatabase()
+    {
         $connection = $this->getConnection();
         $result = $connection->getDatabase();
 
@@ -31,14 +34,16 @@ class AppConfig
     /**
      * return \Doctrine\DBAL\Connection
      */
-    public function getConnection() {
+    public function getConnection()
+    {
         $url = $this->config['database_url'];
         $connection = \Doctrine\DBAL\DriverManager::getConnection(['url' => $url]);
 
         return $connection;
     }
 
-    public function getConnectionParams() {
+    public function getConnectionParams()
+    {
         $result = [];
 
         $connection = $this->getConnection();

@@ -16,7 +16,8 @@ class AppExtension extends Extension
         $configs = $this->processConfiguration($configuration, $configs);
     }
 
-    public function getAlias() {
+    public function getAlias()
+    {
         return self::ALIAS;
     }
 }

@@ -71,6 +71,9 @@
     "seld/phar-utils": {
         "version": "1.0.1"
     },
+    "squizlabs/php_codesniffer": {
+        "version": "3.2.3"
+    },
     "symfony/cache": {
         "version": "v4.0.6"
     },

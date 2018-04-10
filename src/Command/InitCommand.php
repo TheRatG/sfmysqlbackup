@@ -75,12 +75,11 @@ class InitCommand extends ContainerAwareCommand
             'database_url' => $databaseUrl,
         ];
 
-        try
-        {
+        try {
             $configuration = new \App\DependencyInjection\Configuration();
             $processor = new \Symfony\Component\Config\Definition\Processor();
             $processor->processConfiguration($configuration, $config);
-        } catch(\Exception $ex) {
+        } catch (\Exception $ex) {
             $io->error($ex->getMessage());
         }
 

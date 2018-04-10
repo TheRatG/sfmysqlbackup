@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class Backup 
+class Backup
 {
     const DT_FORMAT = 'Ymd_His';
 
@@ -81,7 +81,8 @@ class Backup
         return $this;
     }
 
-    public function getTypeOrderValue() {
+    public function getTypeOrderValue()
+    {
         $map = [
             self::TYPE_LOCAL => 0,
             self::TYPE_REMOTE => 1,

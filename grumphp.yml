@@ -1,4 +1,21 @@
 parameters:
     git_dir: .
     bin_dir: vendor/bin
-    tasks: null
+    tasks:
+        phpcs:
+            standard: "PSR2"
+            encoding: "UTF-8"
+            ignore_patterns:
+                - 'var/'
+                - 'vendor/'
+        git_blacklist:
+            keywords:
+                - "die("
+                - "var_dump("
+                - "VarDumper::dump("
+                - "exit;"
+            triggered_by: [php]
+        git_commit_message:
+            max_body_width: 120
+            max_subject_width: 120
+            enforce_capitalized_subject: false
