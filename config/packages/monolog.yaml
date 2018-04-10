@@ -1,15 +1,18 @@
 monolog:
     handlers:
         create_command:
-            type:  rotating_file
+            type:  stream
             path:  '%kernel.logs_dir%/create.log'
-            level: debug
-            max_files: 365
+            level: info
         restore_command:
-            type:  rotating_file
+            type:  stream
             path:  '%kernel.logs_dir%/restore.log'
-            level: debug
-            max_files: 365
+            level: info
+        show_command:
+            type:  stream
+            path:  '%kernel.logs_dir%/show.log'
+            level: info
     channels:
         - create_command
         - restore_command
+        - show_command

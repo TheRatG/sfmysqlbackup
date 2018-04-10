@@ -8,7 +8,9 @@
         "symfony/framework-bundle": "^4.0",
         "symfony/monolog-bundle": "^3.2",
         "symfony/dotenv": "^4.0",
-        "symfony/yaml": "^4.0"
+        "symfony/yaml": "^4.0",
+        "symfony/process": "^4.0",
+        "doctrine/dbal": "^2.7"
     },
     "license": "MIT",
     "authors": [
@@ -33,5 +35,8 @@
             "cache:clear": "symfony-cmd",
             "assets:install --symlink --relative %PUBLIC_DIR%": "symfony-cmd"
         }
+    },
+    "require-dev": {
+        "phpro/grumphp": "^0.14.0"
     }
 }

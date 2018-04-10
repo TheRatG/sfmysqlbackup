@@ -81,7 +81,7 @@ class Kernel extends BaseKernel
         $container = parent::buildContainer();
 
         $def = $container->getDefinition(\App\Config\AppConfig::class);
-        $def->setArgument(0, $container->getExtensionConfig(\App\DependencyInjection\AppExtension::ALIAS));
+        $def->setArgument(0, $container->getExtensionConfig(\App\DependencyInjection\AppExtension::ALIAS)[0]);
 
         return $container;
     }

@@ -33,7 +33,7 @@ class InitCommand extends ContainerAwareCommand
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Database URL',
-                'mysql://homestead:secret@localhost:3306'
+                'mysql://homestead:secret@localhost:3306/test'
             )
         ;
     }
